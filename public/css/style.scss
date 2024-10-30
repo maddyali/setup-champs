@@ -1,0 +1,94 @@
+@import "./variables";
+@import "~normalize.css/normalize";
+
+body {
+  background-color: $black;
+  color: $white;
+  font-family: $bodyText;
+  .container {
+    max-width: 1140px;
+    margin: auto;
+  }
+
+  h1 {
+    font-family: $displayText;
+  }
+  a {
+    color: $black;
+    text-decoration: none;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  .img-container {
+    max-width: 200px;
+  }
+
+  nav {
+    .btn {
+      color: $white;
+      background-color: #d9d9d9;
+      font-family: $bodyText;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+  }
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60px;
+  .hero-text {
+    max-width: 450px;
+    h1 {
+      font-size: 32px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+    }
+    .highlight {
+      background: linear-gradient(
+        45deg,
+        rgba(252, 197, 43, 0.5),
+        rgba(252, 197, 43, 0.1)
+      );
+    }
+  }
+
+  .cta-btn {
+    color: $white;
+    background-color: $primaryColor;
+    font-family: $bodyText;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 4px;
+    margin-top: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: $secondaryColor;
+    }
+  }
+
+  .img-container {
+    max-width: 500px;
+  }
+}

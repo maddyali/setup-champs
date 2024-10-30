@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const connectDB = require("./config/database");
+const mainRoutes = require("./routes/main");
 
 // Use environment variables
 require("dotenv").config();
@@ -18,9 +19,8 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
+// Routes
+app.use("/", mainRoutes);
 
 // Run server
 app.listen(process.env.PORT, () =>
