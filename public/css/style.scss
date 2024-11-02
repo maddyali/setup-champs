@@ -31,7 +31,13 @@ header {
   .img-container {
     max-width: 12.5rem;
   }
+
+  nav {
+    display: flex;
+    gap: 12px;
+  }
 }
+
 .btn {
   background-color: #d9d9d9;
   font-family: $bodyText;
@@ -39,7 +45,6 @@ header {
   padding: 0.75rem 2rem;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 8px;
   transition: background-color 0.3s ease;
   &:hover {
     background-color: #f8f9fa;
@@ -55,10 +60,12 @@ header {
     max-width: 28rem;
     h1 {
       font-size: 2rem;
+      margin: 1rem 0rem;
     }
     h2 {
       font-size: 1.5rem;
       font-weight: 500;
+      margin: 0rem;
     }
     .highlight {
       background: linear-gradient(
@@ -70,14 +77,10 @@ header {
   }
 
   .cta-btn {
-    color: $white;
     background-color: $primaryColor;
-    font-family: $bodyText;
-    border: none;
     padding: 1rem 2rem;
-    border-radius: 4px;
-    margin-top: 12px;
-    cursor: pointer;
+    margin-top: 1.5rem;
+    display: inline-block;
     transition: background-color 0.3s ease;
     &:hover {
       background-color: $secondaryColor;
@@ -124,8 +127,7 @@ form {
       }
     }
   }
-
-  button {
-    margin-top: 1rem;
+  .btn {
+    margin: 1rem 0rem;
   }
 }

@@ -1,0 +1,21 @@
+<%- include('partials/header') -%>
+
+<div class="container">
+  <section class="form-container">
+    <form action="/login" method="POST">
+      <h2>Log in</h2>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
+      </div>
+
+      <button type="submit" class="btn">Log in</button>
+    </form>
+  </section>
+</div>

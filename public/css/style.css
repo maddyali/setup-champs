@@ -75,7 +75,7 @@ abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -155,7 +155,8 @@ textarea {
  * 1. Show the overflow in Edge.
  */
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -164,27 +165,18 @@ input { /* 1 */
  * 1. Remove the inheritance of text transform in Firefox.
  */
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
-}
-
-/**
- * Correct the inability to style clickable types in iOS and Safari.
- */
-button,
-[type=button],
-[type=reset],
-[type=submit] {
-  -webkit-appearance: button;
 }
 
 /**
  * Remove the inner border and padding in Firefox.
  */
 button::-moz-focus-inner,
-[type=button]::-moz-focus-inner,
-[type=reset]::-moz-focus-inner,
-[type=submit]::-moz-focus-inner {
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -193,9 +185,9 @@ button::-moz-focus-inner,
  * Restore the focus styles unset by the previous rule.
  */
 button:-moz-focusring,
-[type=button]:-moz-focusring,
-[type=reset]:-moz-focusring,
-[type=submit]:-moz-focusring {
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
@@ -239,8 +231,8 @@ textarea {
  * 1. Add the correct box sizing in IE 10.
  * 2. Remove the padding in IE 10.
  */
-[type=checkbox],
-[type=radio] {
+[type="checkbox"],
+[type="radio"] {
   box-sizing: border-box; /* 1 */
   padding: 0; /* 2 */
 }
@@ -248,24 +240,15 @@ textarea {
 /**
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
-[type=number]::-webkit-inner-spin-button,
-[type=number]::-webkit-outer-spin-button {
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
   height: auto;
-}
-
-/**
- * 1. Correct the odd appearance in Chrome and Safari.
- * 2. Correct the outline style in Safari.
- */
-[type=search] {
-  -webkit-appearance: textfield; /* 1 */
-  outline-offset: -2px; /* 2 */
 }
 
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
  */
-[type=search]::-webkit-search-decoration {
+[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -340,6 +323,10 @@ header {
 header .img-container {
   max-width: 12.5rem;
 }
+header nav {
+  display: flex;
+  gap: 12px;
+}
 
 .btn {
   background-color: #d9d9d9;
@@ -348,7 +335,6 @@ header .img-container {
   padding: 0.75rem 2rem;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 8px;
   transition: background-color 0.3s ease;
 }
 .btn:hover {
@@ -366,23 +352,25 @@ header .img-container {
 }
 .hero .hero-text h1 {
   font-size: 2rem;
+  margin: 1rem 0rem;
 }
 .hero .hero-text h2 {
   font-size: 1.5rem;
   font-weight: 500;
+  margin: 0rem;
 }
 .hero .hero-text .highlight {
-  background: linear-gradient(45deg, rgba(252, 197, 43, 0.5), rgba(252, 197, 43, 0.1));
+  background: linear-gradient(
+    45deg,
+    rgba(252, 197, 43, 0.5),
+    rgba(252, 197, 43, 0.1)
+  );
 }
 .hero .cta-btn {
-  color: #f1f1f1;
   background-color: #fcc52b;
-  font-family: "Inter", sans-serif;
-  border: none;
   padding: 1rem 2rem;
-  border-radius: 4px;
-  margin-top: 12px;
-  cursor: pointer;
+  margin-top: 1.5rem;
+  display: inline-block;
   transition: background-color 0.3s ease;
 }
 .hero .cta-btn:hover {
@@ -425,6 +413,6 @@ form .form-group input:focus {
   outline: none;
   border-color: #888;
 }
-form button {
-  margin-top: 1rem;
-}/*# sourceMappingURL=style.css.map */
+form .btn {
+  margin: 1rem 0rem;
+} /*# sourceMappingURL=style.css.map */
