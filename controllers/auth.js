@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const validator = require("validator");
 
 exports.getSignup = (req, res) => {
   res.render("signup.ejs");
@@ -10,6 +11,24 @@ exports.getLogin = (req, res) => {
 // POST
 
 exports.postSignup = async (req, res) => {
+  // Validate user input
+  const validationErrors = [];
+
+  if (!validator.isEmail(req.body.email))
+    validationErrors.push({ msg: "Please enter valid email address." });
+
+  if (validator.isEmpty(req.body.password))
+    validationErrors.push({ msg: "Password cannot be blank." });
+
+  if (validationErrors.length) {
+    return res.status(422).json({
+      errors: validationErrors,
+    });
+  }
+
+  // Normalize user email
+  req.body.email = validator.normalizeEmail(req.body.email);
+
   // Create new user
   const user = new User({
     userName: req.body.userName,
