@@ -20,6 +20,14 @@ exports.postSignup = async (req, res) => {
   if (validator.isEmpty(req.body.password))
     validationErrors.push({ msg: "Password cannot be blank." });
 
+  if (!validator.isLength(req.body.password, { min: 8 }))
+    validationErrors.push({
+      msg: "Password must be at least 8 characters long.",
+    });
+
+  if (req.body.password !== req.body.confirmPassword)
+    validationErrors.push({ msg: "Passwords do not match." });
+
   if (validationErrors.length) {
     return res.status(422).json({
       errors: validationErrors,
