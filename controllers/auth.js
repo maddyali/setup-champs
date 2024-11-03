@@ -12,9 +12,9 @@ exports.getLogin = (req, res) => {
 exports.postSignup = async (req, res) => {
   // Create new user
   const user = new User({
-    userName: req.query.userName,
-    email: req.query.email,
-    password: req.query.password,
+    userName: req.body.userName,
+    email: req.body.email,
+    password: req.body.password,
   });
 
   try {
@@ -32,7 +32,7 @@ exports.postSignup = async (req, res) => {
 };
 
 exports.postLogin = async (req, res) => {
-  const { email, password } = req.query;
+  const { email, password } = req.body;
   try {
     // Find user in DB
     const user = await User.findOne({ email });
