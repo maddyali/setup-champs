@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
 
 // Pre-save middleware to hash the password
 
-UserSchema.pre("save", function save(next) {
+UserSchema.pre("save", async function save(next) {
   const user = this;
 
   // Only hash the password if its been modified or is new
@@ -18,34 +18,31 @@ UserSchema.pre("save", function save(next) {
     return next();
   }
 
-  // Generate a salt and hash the password
+  try {
+    // Generate a salt
+    const salt = await bcrypt.genSalt(10);
 
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      return next(err);
-    }
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) {
-        return next(err);
-      }
-      user.password = hash;
-      console.log(`salthash pw: ${user.password}`);
+    // Hash the password
+    user.password = bcrypt.hash(user.password, salt);
 
-      next();
-    });
-  });
+    next();
+  } catch (error) {
+    return next(error);
+  }
 });
 
 // Compare entered password with stored hashed password
 
-UserSchema.methods.comparePassword = function comparePassword(
-  enteredPassword,
-  cb
+UserSchema.methods.comparePassword = async function comparePassword(
+  enteredPassword
 ) {
-  bcrypt.compare(enteredPassword, this.password, (err, isMatch) => {
-    console.log(`enteredpw: ${enteredPassword}, hashpw: ${this.password}`);
-    cb(err, isMatch);
-  });
+  try {
+    const isMatch = await bcrypt.compare(enteredPassword, this.password);
+    console.log(`pw: ${enteredPassword}, hashpw: ${this.password}`);
+    return isMatch; // Return the result
+  } catch (err) {
+    throw err;
+  }
 };
 
 module.exports = mongoose.model("User", UserSchema);
