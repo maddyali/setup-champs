@@ -18,12 +18,16 @@ UserSchema.pre("save", async function save(next) {
     return next();
   }
 
+  console.log("Original password:", user.password);
+
   try {
     // Generate a salt
     const salt = await bcrypt.genSalt(10);
 
     // Hash the password
-    user.password = bcrypt.hash(user.password, salt);
+    user.password = await bcrypt.hash(user.password, salt);
+
+    console.log("Hashed password:", user.password);
 
     next();
   } catch (error) {
