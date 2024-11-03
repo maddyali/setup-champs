@@ -51,7 +51,26 @@ exports.postSignup = async (req, res) => {
 };
 
 exports.postLogin = async (req, res) => {
-  const { email, password } = req.body;
+  // Validate user input
+  const validationErrors = [];
+
+  if (!validator.isEmail(req.body.email))
+    validationErrors.push({ msg: "Please enter valid email address." });
+
+  if (validator.isEmpty(req.body.password))
+    validationErrors.push({ msg: "Password cannot be blank." });
+
+  if (validationErrors.length) {
+    return res.status(422).json({
+      errors: validationErrors,
+    });
+  }
+
+  // Normalize user email
+  const email = validator.normalizeEmail(req.body.email);
+
+  const password = req.body.password;
+
   try {
     // Find user in DB
     const user = await User.findOne({ email });
