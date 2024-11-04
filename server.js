@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 // Use environment variables
 require("dotenv").config();
@@ -18,6 +20,16 @@ app.use(express.static("public"));
 // Parse incoming request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Setup sessions - stored in MongoDB
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false, // Don't save session if unmodified
+    saveUninitialized: false, // Don't save session until something stored
+    store: MongoStore.create({ mongoUrl: process.env.DB_STR }),
+  })
+);
 
 // Routes
 app.use("/", mainRoutes);
