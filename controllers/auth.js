@@ -1,10 +1,18 @@
 const User = require("../models/User");
 const validator = require("validator");
+const passport = require("passport");
 
 exports.getSignup = (req, res) => {
+  if (req.user) {
+    return res.redirect("/profile");
+  }
   res.render("signup.ejs");
 };
+
 exports.getLogin = (req, res) => {
+  if (req.user) {
+    return res.redirect("/profile");
+  }
   res.render("login.ejs");
 };
 
@@ -47,7 +55,6 @@ exports.postSignup = async (req, res) => {
   try {
     // Save new user
     await user.save();
-    console.log("User saved with hashed password:", user.password);
 
     res.status(200).json({
       msg: "signed up",
@@ -58,7 +65,7 @@ exports.postSignup = async (req, res) => {
   }
 };
 
-exports.postLogin = async (req, res) => {
+exports.postLogin = async (req, res, next) => {
   // Validate user input
   const validationErrors = [];
 
@@ -75,40 +82,36 @@ exports.postLogin = async (req, res) => {
   }
 
   // Normalize user email
-  const email = validator.normalizeEmail(req.body.email);
+  req.body.email = validator.normalizeEmail(req.body.email);
 
-  const password = req.body.password;
-
-  try {
-    // Find user in DB
-    const user = await User.findOne({ email });
-
-    // If user not found, respond with error
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
     if (!user) {
-      return res.status(404).json({ msg: "user not found" });
+      return res.send(info);
     }
 
-    // Compare entered password with stored hashed password
-    const isMatchCorrect = await user.comparePassword(password);
-
-    // Send correct response
-    if (isMatchCorrect) {
-      console.log("Correct password match:", isMatchCorrect);
-      return res.status(200).json({ msg: "login succesful" });
-    } else {
-      return res.status(401).json({ msg: "invalid password" });
-    }
-  } catch (error) {
-    console.log("Error during login:", error);
-
-    return res.status(500).json({ msg: "internal server error" });
-  }
+    // Attach authenticated user object to req.user property
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      console.log("Success! You are loggged in.");
+      res.redirect("/profile");
+    });
+  })(req, res, next);
 };
 
-exports.postLogout = (req, res) => {
-  res.json({
-    timestamp: Date.now(),
-    msg: "logout succesful",
-    code: 200,
+exports.logout = (req, res) => {
+  req.logout(() => {
+    // Destroy the session data
+    req.session.destroy((err) => {
+      if (err) {
+        console.log("Error: failed to destroy session during logout.", err);
+      }
+      req.user = null;
+      console.log("Goodbye! You are logged out.");
+
+      res.redirect("/");
+    });
   });
 };

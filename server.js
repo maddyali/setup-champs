@@ -4,9 +4,13 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const passport = require("passport");
 
 // Use environment variables
 require("dotenv").config();
+
+// Initialize Passport config
+require("./config/passport")(passport);
 
 // Connect to database
 connectDB();
@@ -30,6 +34,10 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_STR }),
   })
 );
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use("/", mainRoutes);
