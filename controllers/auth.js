@@ -52,6 +52,18 @@ exports.postSignup = async (req, res) => {
   });
 
   try {
+    // Check if user already exists
+    const existingUser = await User.findOne({
+      $or: [{ email: req.body.email }, { userName: req.body.userName }],
+    });
+
+    if (existingUser) {
+      req.flash("errors", {
+        msg: "Account with that email address or username already exists.",
+      });
+      return res.redirect("/signup");
+    }
+
     // Save new user
     await user.save();
 
@@ -99,7 +111,7 @@ exports.postLogin = async (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) return next(err);
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+      res.redirect(req.session.returnTO || "/profile");
     });
   })(req, res, next);
 };
