@@ -2,6 +2,15 @@
 
 <div class="container">
   <section class="form-container">
+    <!-- Display error messages -->
+    <div class="alert alert-error">
+      <% if (locals.messages.errors) { %> <% messages.errors.forEach((el) => {
+      %>
+      <p><%= el.msg %></p>
+
+      <% }); %> <% } %>
+    </div>
+
     <form action="/signup" method="POST">
       <h2>Create an account</h2>
 

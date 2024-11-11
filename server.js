@@ -5,6 +5,7 @@ const mainRoutes = require("./routes/main");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
+const flash = require("express-flash");
 
 // Use environment variables
 require("dotenv").config();
@@ -38,6 +39,9 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Middleware to handle flash messages for errors, info, etc.
+app.use(flash());
 
 // Routes
 app.use("/", mainRoutes);

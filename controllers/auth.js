@@ -37,9 +37,8 @@ exports.postSignup = async (req, res) => {
     validationErrors.push({ msg: "Passwords do not match." });
 
   if (validationErrors.length) {
-    return res.status(422).json({
-      errors: validationErrors,
-    });
+    req.flash("errors", validationErrors);
+    return res.redirect("/signup");
   }
 
   // Normalize user email
@@ -56,12 +55,16 @@ exports.postSignup = async (req, res) => {
     // Save new user
     await user.save();
 
-    res.status(200).json({
-      msg: "signed up",
-      user: user,
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      req.flash("success", { msg: "Welcome! You are now logged in." });
     });
+
+    res.redirect("/profile");
   } catch (error) {
     console.log("Error saving user:", error);
+    req.flash("errors", { msg: "There was an error creating your account." });
+    res.redirect("/signup");
   }
 };
 
@@ -76,9 +79,8 @@ exports.postLogin = async (req, res, next) => {
     validationErrors.push({ msg: "Password cannot be blank." });
 
   if (validationErrors.length) {
-    return res.status(422).json({
-      errors: validationErrors,
-    });
+    req.flash("errors", validationErrors);
+    return res.redirect("/login");
   }
 
   // Normalize user email
@@ -89,14 +91,15 @@ exports.postLogin = async (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.send(info);
+      req.flash("errors", info);
+      return res.redirect("/login");
     }
 
     // Attach authenticated user object to req.user property
     req.logIn(user, (err) => {
       if (err) return next(err);
-      console.log("Success! You are loggged in.");
-      res.redirect("/profile");
+      req.flash("success", { msg: "Success! You are logged in." });
+      res.redirect(req.session.returnTo || "/profile");
     });
   })(req, res, next);
 };
