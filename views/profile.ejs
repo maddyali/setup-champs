@@ -1,7 +1,7 @@
+<%- include('partials/header') %>
 <h1>Profile</h1>
 <p>Username: <%= user.userName %></p>
 <p>Email: <%= user.email %></p>
-<a href="/logout">Logout</a>
 <h2>Add a post</h2>
 <!-- Display success messages -->
 <% if (locals.messages.success) { %> <% messages.success.forEach((el) => { %>

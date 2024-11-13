@@ -6,14 +6,14 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
   }
-  res.render("signup.ejs");
+  res.render("signup.ejs", { user: null });
 };
 
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/profile");
   }
-  res.render("login.ejs");
+  res.render("login.ejs", { user: null });
 };
 
 // POST
