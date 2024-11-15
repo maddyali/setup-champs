@@ -1,0 +1,8 @@
+<!-- Display every user's posts -->
+<div class="posts-container">
+  <% posts.forEach(post => { %>
+  <div class="post">
+    <p><strong><%= post.user %></strong> <%= post.caption %></p>
+  </div>
+  <% }) %>
+</div>

@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
 const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
 const flash = require("express-flash");
+const mainRoutes = require("./routes/main");
+const postRoutes = require("./routes/posts");
 
 // Use environment variables
 require("dotenv").config();
@@ -45,6 +46,7 @@ app.use(flash());
 
 // Routes
 app.use("/", mainRoutes);
+app.use("/post", postRoutes);
 
 // Run server
 app.listen(process.env.PORT, () =>

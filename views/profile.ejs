@@ -2,8 +2,38 @@
 <h1>Profile</h1>
 <p>Username: <%= user.userName %></p>
 <p>Email: <%= user.email %></p>
-<h2>Add a post</h2>
+<a class="btn" href="/feed">Return to feed</a>
 <!-- Display success messages -->
 <% if (locals.messages.success) { %> <% messages.success.forEach((el) => { %>
 <p class="alert alert-error"><%= el.msg %></p>
 <% }); %> <% } %>
+
+<section>
+  <!-- Add post -->
+  <form action="/post/createPost" method="POST">
+    <h2>New post</h2>
+
+    <div class="form-group">
+      <label for="imageUpload">Image</label>
+      <input type="file" id="imageUpload" name="imageUpload" />
+    </div>
+
+    <div class="form-group">
+      <label for="caption">Caption</label>
+      <textarea style="width: 98%" id="caption" name="caption"></textarea>
+    </div>
+
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</section>
+
+<section>
+  <!-- Display current user posts -->
+  <div class="posts-container">
+    <% posts.forEach(post => { %>
+    <div class="post">
+      <p><strong><%= user.userName %></strong> <%= post.caption %></p>
+    </div>
+    <% }) %>
+  </div>
+</section>
