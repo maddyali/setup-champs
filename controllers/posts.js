@@ -14,6 +14,7 @@ module.exports = {
     try {
       await Post.create({
         user: req.user.id,
+        userName: req.user.userName,
         image: "",
         caption: req.body.caption,
       });
@@ -28,7 +29,7 @@ module.exports = {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
 
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { user: req.user, posts: posts });
     } catch (err) {
       console.log(err);
     }

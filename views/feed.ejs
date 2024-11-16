@@ -1,8 +1,10 @@
+<%- include('partials/header') %>
+<h2>Explore Setups</h2>
 <!-- Display every user's posts -->
 <div class="posts-container">
   <% posts.forEach(post => { %>
   <div class="post">
-    <p><strong><%= post.user %></strong> <%= post.caption %></p>
+    <p><strong><%= post.userName %></strong> <%= post.caption %></p>
   </div>
   <% }) %>
 </div>

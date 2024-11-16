@@ -1,8 +1,5 @@
 <%- include('partials/header') %>
 <h1>Profile</h1>
-<p>Username: <%= user.userName %></p>
-<p>Email: <%= user.email %></p>
-<a class="btn" href="/feed">Return to feed</a>
 <!-- Display success messages -->
 <% if (locals.messages.success) { %> <% messages.success.forEach((el) => { %>
 <p class="alert alert-error"><%= el.msg %></p>
