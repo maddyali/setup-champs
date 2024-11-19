@@ -429,4 +429,42 @@ form .form-group input:focus {
 }
 form .btn {
   margin: 1rem 0rem;
+}
+
+.posts-container {
+  max-width: 984px;
+  margin: 4rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.posts-container .post {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+.posts-container .post .post-info {
+  width: 100%;
+}
+.posts-container .post .post-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.posts-container .post .post-actions {
+  display: flex;
+  justify-content: space-between;
+}
+.posts-container .post .icon {
+  color: #f1f1f1;
+  margin-right: 8px;
+}
+.posts-container .post .icon:last-child {
+  margin-right: 0px;
 }/*# sourceMappingURL=style.css.map */

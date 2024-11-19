@@ -1,10 +1,31 @@
 <%- include('partials/header') %>
-<h2>Explore Setups</h2>
 <!-- Display every user's posts -->
 <div class="posts-container">
   <% posts.forEach(post => { %>
   <div class="post">
-    <p><strong><%= post.userName %></strong> <%= post.caption %></p>
+    <div class="img-container post-image">
+      <img src="#" alt="#" />
+    </div>
+
+    <div class="post-info">
+      <div class="post-actions">
+        <div>
+          <a href="#" title="Like" class="icon">
+            <i class="fas fa-heart"></i
+          ></a>
+          <a href="#" title="Comment" class="icon"
+            ><i class="fas fa-comment"></i
+          ></a>
+        </div>
+        <a href="#" title="Bookmark" class="icon"
+          ><i class="fas fa-bookmark"></i
+        ></a>
+      </div>
+
+      <p class="post-text">
+        <strong><%= post.userName %></strong> <%= post.caption %>
+      </p>
+    </div>
   </div>
   <% }) %>
 </div>

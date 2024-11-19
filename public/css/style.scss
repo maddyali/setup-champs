@@ -132,3 +132,46 @@ form {
     margin: 1rem 0rem;
   }
 }
+
+// feed
+
+.posts-container {
+  max-width: 984px;
+  margin: 4rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1;
+
+    .post-info {
+      width: 100%;
+    }
+    .post-text {
+      // width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+    .icon {
+      color: $white;
+      margin-right: 8px;
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+}
