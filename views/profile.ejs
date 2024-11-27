@@ -5,32 +5,56 @@
 <p class="alert alert-error"><%= el.msg %></p>
 <% }); %> <% } %>
 
-<section>
-  <!-- Add post -->
-  <form action="/post/createPost" method="POST">
-    <h2>New post</h2>
+<div class="profile-container">
+  <section>
+    <!-- Add post -->
+    <form action="/post/createPost" method="POST">
+      <h2>New post</h2>
 
-    <div class="form-group">
-      <label for="imageUpload">Image</label>
-      <input type="file" id="imageUpload" name="imageUpload" />
+      <div class="form-group">
+        <label for="imageUpload">Image</label>
+        <input type="file" id="imageUpload" name="imageUpload" />
+      </div>
+
+      <div class="form-group">
+        <label for="caption">Caption</label>
+        <textarea style="width: 98%" id="caption" name="caption"></textarea>
+      </div>
+
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>
+
+  <section>
+    <!-- Display current user posts -->
+    <div class="posts-container">
+      <% posts.forEach(post => { %>
+      <div class="post">
+        <div class="img-container post-image">
+          <img src="#" alt="#" />
+        </div>
+
+        <div class="post-info">
+          <div class="post-actions">
+            <div>
+              <a href="#" title="Like" class="icon">
+                <i class="fas fa-heart"></i
+              ></a>
+              <a href="#" title="Comment" class="icon"
+                ><i class="fas fa-comment"></i
+              ></a>
+            </div>
+            <a href="#" title="Bookmark" class="icon"
+              ><i class="fas fa-bookmark"></i
+            ></a>
+          </div>
+
+          <p class="post-text">
+            <strong><%= post.userName %></strong> <%= post.caption %>
+          </p>
+        </div>
+      </div>
+      <% }) %>
     </div>
-
-    <div class="form-group">
-      <label for="caption">Caption</label>
-      <textarea style="width: 98%" id="caption" name="caption"></textarea>
-    </div>
-
-    <button type="submit" class="btn">Submit</button>
-  </form>
-</section>
-
-<section>
-  <!-- Display current user posts -->
-  <div class="posts-container">
-    <% posts.forEach(post => { %>
-    <div class="post">
-      <p><strong><%= user.userName %></strong> <%= post.caption %></p>
-    </div>
-    <% }) %>
-  </div>
-</section>
+  </section>
+</div>

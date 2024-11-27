@@ -467,4 +467,9 @@ form .btn {
 }
 .posts-container .post .icon:last-child {
   margin-right: 0px;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=style.css.map */
