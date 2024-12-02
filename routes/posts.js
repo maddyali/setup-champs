@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/multer");
 const ensureAuth = require("../middleware/auth");
 const postsController = require("../controllers/posts");
 
 // TODO Select posts
 
 // TODO Add functionality to upload files
-router.post("/createPost", postsController.createPost);
+router.post("/createPost", upload.single("file"), postsController.createPost);
 
 // TODO Like posts
 
