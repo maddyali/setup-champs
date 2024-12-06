@@ -180,3 +180,27 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+.action-form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+
+  .action-btn {
+    display: inline;
+    color: $white;
+    padding: 0;
+    border: none;
+    background: transparent;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+}

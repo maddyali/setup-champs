@@ -472,4 +472,27 @@ form .btn {
 .profile-container {
   display: flex;
   flex-direction: column;
+}
+
+.action-form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+.action-form .action-btn {
+  display: inline;
+  color: #f1f1f1;
+  padding: 0;
+  border: none;
+  background: transparent;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.action-form .action-btn:last-child {
+  margin-right: 0px;
 }/*# sourceMappingURL=style.css.map */

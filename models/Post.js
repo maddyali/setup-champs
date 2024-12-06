@@ -21,6 +21,12 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  bookmarks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Post", PostSchema);

@@ -47,4 +47,18 @@ module.exports = {
       console.log(err);
     }
   },
+  bookmarkPost: async (req, res) => {
+    try {
+      await Post.findByIdAndUpdate(
+        { _id: req.params.id },
+        {
+          $addToSet: { bookmarks: req.user.id }, // Prevent duplicate entries
+        }
+      );
+      console.log("bookmarked!");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

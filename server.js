@@ -7,6 +7,7 @@ const passport = require("passport");
 const flash = require("express-flash");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
+const methodOverride = require("method-override");
 
 // Use environment variables
 require("dotenv").config();
@@ -26,6 +27,9 @@ app.use(express.static("public"));
 // Parse incoming request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Use forms for put / delete
+app.use(methodOverride("_method"));
 
 // Setup sessions - stored in MongoDB
 app.use(

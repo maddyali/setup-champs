@@ -19,9 +19,17 @@
             ><i class="fas fa-comment"></i
           ></a>
         </div>
-        <a href="#" title="Bookmark" class="icon"
-          ><i class="fas fa-bookmark"></i
-        ></a>
+
+        <!-- bookmark -->
+        <form
+          action="/post/bookmarkPost/<%= post._id%>?_method=PUT"
+          method="POST"
+          class="action-form"
+        >
+          <button type="submit" class="icon action-btn" title="Bookmark">
+            <i class="fas fa-bookmark"></i>
+          </button>
+        </form>
       </div>
 
       <p class="post-text">
