@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+<!-- Display every user's posts -->
+<div class="posts-container">
+  <% posts.forEach(post => { %>
+  <div class="post">
+    <div class="img-container post-image">
+      <a href="/post/<%= post._id%>">
+        <img src="<%= post.image %>" alt="#" />
+      </a>
+    </div>
+
+    <div class="post-info">
+      <div class="post-actions">
+        <div>
+          <a href="#" title="Like" class="icon">
+            <i class="fas fa-heart"></i
+          ></a>
+          <a href="/post/<%= post._id%>" title="Comment" class="icon"
+            ><i class="fas fa-comment"></i
+          ></a>
+        </div>
+
+        <!-- bookmark -->
+        <form
+          action="/post/bookmarkPost/<%= post._id%>?_method=PUT"
+          method="POST"
+          class="action-form"
+        >
+          <button type="submit" class="icon action-btn" title="Bookmark">
+            <i class="fas fa-bookmark"></i>
+          </button>
+        </form>
+      </div>
+
+      <p class="post-text">
+        <strong><%= post.userName %></strong> <%= post.caption %>
+      </p>
+    </div>
+  </div>
+  <% }) %>
+</div>

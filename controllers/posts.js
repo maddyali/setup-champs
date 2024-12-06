@@ -61,4 +61,16 @@ module.exports = {
       console.log(err);
     }
   },
+  getBookmarkedPosts: async (req, res) => {
+    try {
+      const bookmarkedPosts = await Post.find({
+        bookmarks: req.user.id,
+      }).lean();
+      console.log(bookmarkedPosts);
+      res.render("bookmarked.ejs", { user: req.user, posts: bookmarkedPosts });
+    } catch (err) {
+      console.log(err);
+      res.redirect("/profile");
+    }
+  },
 };
