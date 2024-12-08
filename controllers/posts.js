@@ -73,4 +73,19 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+  likePost: async (req, res) => {
+    try {
+      const post = await Post.findByIdAndUpdate(
+        req.params.id,
+        {
+          $addToSet: { likes: req.user.id },
+        },
+        { new: true }
+      );
+      console.log(post.likes);
+      res.redirect("/feed");
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

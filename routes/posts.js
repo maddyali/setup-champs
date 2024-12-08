@@ -13,6 +13,7 @@ router.post("/createPost", upload.single("file"), postsController.createPost);
 router.put("/bookmarkPost/:id", postsController.bookmarkPost);
 
 // TODO Like posts
+router.put("/likePost/:id", postsController.likePost);
 
 // TODO Delete posts
 
