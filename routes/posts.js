@@ -16,5 +16,6 @@ router.put("/bookmarkPost/:id", postsController.bookmarkPost);
 router.put("/likePost/:id", postsController.likePost);
 
 // TODO Delete posts
+router.delete("/deletePost/:id", postsController.deletePost);
 
 module.exports = router;

@@ -28,16 +28,33 @@
           ></a>
         </div>
 
-        <!-- bookmark -->
-        <form
-          action="/post/bookmarkPost/<%= post._id%>?_method=PUT"
-          method="POST"
-          class="action-form"
-        >
-          <button type="submit" class="icon action-btn" title="Bookmark">
-            <i class="fas fa-bookmark"></i>
-          </button>
-        </form>
+        <div>
+          <!-- bookmark -->
+          <form
+            action="/post/bookmarkPost/<%= post._id%>?_method=PUT"
+            method="POST"
+            class="action-form"
+          >
+            <button type="submit" class="icon action-btn" title="Bookmark">
+              <i class="fas fa-bookmark"></i>
+            </button>
+          </form>
+
+          <% if(post.user == user.id) { %>
+
+          <!-- delete -->
+          <form
+            action="/post/deletePost/<%= post._id%>?_method=DELETE"
+            method="POST"
+            class="action-form"
+          >
+            <button type="submit" class="icon action-btn" title="Delete">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </form>
+
+          <% } %>
+        </div>
       </div>
       <p class="post-text">
         <%= post.likes.length === 0 ? "Be first to like! 🏆" :

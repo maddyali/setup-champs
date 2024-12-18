@@ -88,4 +88,17 @@ module.exports = {
       console.log(err);
     }
   },
+  deletePost: async (req, res) => {
+    try {
+      const post = await Post.findById({ _id: req.params.id });
+
+      await cloudinary.uploader.destroy(post.cloudinaryId);
+      await Post.findOneAndDelete({ _id: post._id });
+
+      console.log("Deleted post");
+      res.redirect("/profile");
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
