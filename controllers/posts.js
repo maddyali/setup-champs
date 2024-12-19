@@ -4,6 +4,8 @@ const cloudinary = require("../middleware/cloudinary");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      req.session.returnTo = req.originalUrl;
+
       const posts = await Post.find({ user: req.user.id });
 
       res.render("profile.ejs", { user: req.user, posts: posts });
@@ -32,6 +34,10 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
+      req.session.returnTo = req.originalUrl;
+
+      console.log(req.session.returnTo);
+
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
 
       res.render("feed.ejs", { user: req.user, posts: posts });
@@ -56,7 +62,7 @@ module.exports = {
         }
       );
       console.log("bookmarked!");
-      res.redirect(`/post/${req.params.id}`);
+      res.redirect(req.session.returnTo || `/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -83,7 +89,7 @@ module.exports = {
         { new: true }
       );
       console.log(post.likes);
-      res.redirect("/feed");
+      res.redirect(req.session.returnTo || "/feed");
     } catch (err) {
       console.log(err);
     }
@@ -95,8 +101,9 @@ module.exports = {
       await cloudinary.uploader.destroy(post.cloudinaryId);
       await Post.findOneAndDelete({ _id: post._id });
 
-      console.log("Deleted post");
-      res.redirect("/profile");
+      console.log(`deleted post. returning to ${req.session.returnTo}`);
+
+      res.redirect(req.session.returnTo || "/profile");
     } catch (err) {
       console.log(err);
     }
