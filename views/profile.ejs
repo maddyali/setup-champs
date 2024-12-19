@@ -37,9 +37,18 @@
         <div class="post-info">
           <div class="post-actions">
             <div>
-              <a href="#" title="Like" class="icon">
-                <i class="fas fa-heart"></i
-              ></a>
+              <!-- like -->
+              <form
+                action="/post/likePost/<%= post._id%>?_method=PUT"
+                method="POST"
+                class="action-form"
+              >
+                <button type="submit" class="icon action-btn" title="Like">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </form>
+
+              <!-- comment -->
               <a href="#" title="Comment" class="icon"
                 ><i class="fas fa-comment"></i
               ></a>
@@ -49,6 +58,10 @@
             ></a>
           </div>
 
+          <p class="post-text">
+            <%= post.likes.length === 0 ? "Be first to like! 🏆" :
+            `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}` %>
+          </p>
           <p class="post-text">
             <strong><%= post.userName %></strong> <%= post.caption %>
           </p>
