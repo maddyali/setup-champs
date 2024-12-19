@@ -70,9 +70,8 @@ exports.postSignup = async (req, res) => {
     req.logIn(user, (err) => {
       if (err) return next(err);
       req.flash("success", { msg: "Welcome! You are now logged in." });
+      return res.redirect("/profile");
     });
-
-    res.redirect("/profile");
   } catch (error) {
     console.log("Error saving user:", error);
     req.flash("errors", { msg: "There was an error creating your account." });
