@@ -33,7 +33,6 @@
         <div class="img-container post-image">
           <img src="<%= post.image %>" alt="#" />
         </div>
-
         <div class="post-info">
           <div class="post-actions">
             <div>
@@ -48,16 +47,39 @@
                 </button>
               </form>
 
-              <!-- comment -->
-              <a href="#" title="Comment" class="icon"
+              <a href="/post/<%= post._id%>" title="Comment" class="icon"
                 ><i class="fas fa-comment"></i
               ></a>
             </div>
-            <a href="#" title="Bookmark" class="icon"
-              ><i class="fas fa-bookmark"></i
-            ></a>
-          </div>
 
+            <div>
+              <!-- bookmark -->
+              <form
+                action="/post/bookmarkPost/<%= post._id%>?_method=PUT"
+                method="POST"
+                class="action-form"
+              >
+                <button type="submit" class="icon action-btn" title="Bookmark">
+                  <i class="fas fa-bookmark"></i>
+                </button>
+              </form>
+
+              <% if(post.user == user.id) { %>
+
+              <!-- delete -->
+              <form
+                action="/post/deletePost/<%= post._id%>?_method=DELETE"
+                method="POST"
+                class="action-form"
+              >
+                <button type="submit" class="icon action-btn" title="Delete">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </form>
+
+              <% } %>
+            </div>
+          </div>
           <p class="post-text">
             <%= post.likes.length === 0 ? "Be first to like! 🏆" :
             `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}` %>
