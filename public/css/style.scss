@@ -93,6 +93,10 @@ header {
   }
 }
 
+.title {
+  text-align: center;
+}
+
 // Sign up
 
 .form-container {
@@ -139,8 +143,13 @@ form {
   max-width: 984px;
   margin: 4rem auto 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
+
+  &.single-post {
+    justify-content: center;
+    grid-template-columns: 300px;
+  }
 
   .post {
     display: flex;
@@ -149,23 +158,35 @@ form {
     align-items: center;
     padding: 1rem;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
-    aspect-ratio: 1;
 
+    .post-image {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+
+      a img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
     .post-info {
       width: 100%;
     }
-    .post-text {
-      // width: 100%;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
+
     .post-actions {
       display: flex;
       justify-content: space-between;
     }
+
     .icon {
       color: $white;
       margin-right: 8px;
@@ -173,12 +194,13 @@ form {
         margin-right: 0px;
       }
     }
+    .post-text {
+      width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
-}
-
-.profile-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .action-form {

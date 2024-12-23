@@ -394,6 +394,10 @@ header nav {
   max-width: 30rem;
 }
 
+.title {
+  text-align: center;
+}
+
 .form-container {
   margin-top: 3rem;
 }
@@ -435,8 +439,12 @@ form .btn {
   max-width: 984px;
   margin: 4rem auto 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
+}
+.posts-container.single-post {
+  justify-content: center;
+  grid-template-columns: 300px;
 }
 .posts-container .post {
   display: flex;
@@ -445,17 +453,28 @@ form .btn {
   align-items: center;
   padding: 1rem;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  aspect-ratio: 1;
+}
+.posts-container .post .post-image {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+.posts-container .post .post-image a img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .posts-container .post .post-info {
   width: 100%;
-}
-.posts-container .post .post-text {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 .posts-container .post .post-actions {
   display: flex;
@@ -468,10 +487,11 @@ form .btn {
 .posts-container .post .icon:last-child {
   margin-right: 0px;
 }
-
-.profile-container {
-  display: flex;
-  flex-direction: column;
+.posts-container .post .post-text {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .action-form {

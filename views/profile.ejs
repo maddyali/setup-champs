@@ -1,5 +1,5 @@
 <%- include('partials/header') %>
-<h1>Profile</h1>
+<h1 class="title">Profile</h1>
 <!-- Display success messages -->
 <% if (locals.messages.success) { %> <% messages.success.forEach((el) => { %>
 <p class="alert alert-error"><%= el.msg %></p>
@@ -27,12 +27,15 @@
 
   <section>
     <!-- Display current user posts -->
-    <div class="posts-container">
+    <div class="posts-container <%= posts.length === 1 ? 'single-post' : '' %>">
       <% posts.forEach(post => { %>
       <div class="post">
-        <div class="img-container post-image">
-          <img src="<%= post.image %>" alt="#" />
+        <div class="post-image">
+          <a href="/post/<%= post._id%>">
+            <img src="<%= post.image %>" alt="#" />
+          </a>
         </div>
+
         <div class="post-info">
           <div class="post-actions">
             <div>
