@@ -55,13 +55,26 @@ module.exports = {
   },
   bookmarkPost: async (req, res) => {
     try {
-      await Post.findByIdAndUpdate(
-        { _id: req.params.id },
-        {
-          $addToSet: { bookmarks: req.user.id }, // Prevent duplicate entries
-        }
-      );
-      console.log("bookmarked!");
+      const post = await Post.findById({ _id: req.params.id });
+
+      if (post.bookmarks.includes(req.user.id)) {
+        await Post.findByIdAndUpdate(
+          { _id: req.params.id },
+          {
+            $pull: { bookmarks: req.user.id }, // remove user id
+          }
+        );
+        console.log("unbookmarked!");
+      } else {
+        await Post.findByIdAndUpdate(
+          { _id: req.params.id },
+          {
+            $addToSet: { bookmarks: req.user.id }, // Prevent duplicate entries
+          }
+        );
+        console.log("bookmarked!");
+      }
+
       res.redirect(req.session.returnTo || `/post/${req.params.id}`);
     } catch (err) {
       console.log(err);
@@ -69,6 +82,8 @@ module.exports = {
   },
   getBookmarkedPosts: async (req, res) => {
     try {
+      req.session.returnTo = req.originalUrl;
+
       const bookmarkedPosts = await Post.find({
         bookmarks: req.user.id,
       }).lean();
