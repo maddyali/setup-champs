@@ -29,3 +29,15 @@ Backend:
 • MongoDB + Mongoose for data storage
 
 • Passport.js for user authentication
+
+## Test Account
+
+Explore the platform using this test account:
+
+Username: testuser
+
+Email: testuser@demo.com
+
+Password: password123
+
+_Note: This is an MVP, so some actions and features may be limited or under development._
