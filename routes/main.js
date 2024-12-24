@@ -17,9 +17,4 @@ router.get("/feed", ensureAuth, postsController.getFeed);
 router.post("/signup", authController.postSignup);
 router.post("/login", authController.postLogin);
 
-// Catchall route for 404
-// router.all("*", (req, res) => {
-//   res.status(404).send("404 - Page Not Found");
-// });
-
 module.exports = router;

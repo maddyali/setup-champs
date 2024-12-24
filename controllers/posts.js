@@ -15,7 +15,6 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
-      console.log(req.file);
       const result = await cloudinary.uploader.upload(req.file.path);
 
       await Post.create({
@@ -26,7 +25,6 @@ module.exports = {
         caption: req.body.caption,
       });
 
-      console.log("Post created!");
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
@@ -35,8 +33,6 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       req.session.returnTo = req.originalUrl;
-
-      console.log(req.session.returnTo);
 
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
 
@@ -64,7 +60,6 @@ module.exports = {
             $pull: { bookmarks: req.user.id }, // remove user id
           }
         );
-        console.log("unbookmarked!");
       } else {
         await Post.findByIdAndUpdate(
           { _id: req.params.id },
@@ -72,7 +67,6 @@ module.exports = {
             $addToSet: { bookmarks: req.user.id }, // Prevent duplicate entries
           }
         );
-        console.log("bookmarked!");
       }
 
       res.redirect(req.session.returnTo || `/post/${req.params.id}`);
@@ -87,7 +81,7 @@ module.exports = {
       const bookmarkedPosts = await Post.find({
         bookmarks: req.user.id,
       }).lean();
-      console.log(bookmarkedPosts);
+
       res.render("bookmarked.ejs", { user: req.user, posts: bookmarkedPosts });
     } catch (err) {
       console.log(err);
@@ -103,7 +97,7 @@ module.exports = {
         },
         { new: true }
       );
-      console.log(post.likes);
+
       res.redirect(req.session.returnTo || "/feed");
     } catch (err) {
       console.log(err);
@@ -115,8 +109,6 @@ module.exports = {
 
       await cloudinary.uploader.destroy(post.cloudinaryId);
       await Post.findOneAndDelete({ _id: post._id });
-
-      console.log(`deleted post. returning to ${req.session.returnTo}`);
 
       res.redirect(req.session.returnTo || "/profile");
     } catch (err) {
