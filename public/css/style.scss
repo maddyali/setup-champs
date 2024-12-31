@@ -29,18 +29,60 @@ header {
   justify-content: space-between;
   margin-top: 12px;
   .img-container {
-    max-width: 12.5rem;
+    max-width: 8.5rem;
   }
 
   nav {
     display: flex;
     align-items: center;
     gap: 12px;
+
+    .menu {
+      position: relative;
+      .menu-btn {
+        background: none;
+        border: none;
+        font-size: 36px;
+        color: $white;
+        cursor: pointer;
+        padding: 0;
+      }
+      .dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: $secondaryColor;
+        border-radius: 4px;
+        padding: 1rem 0.5rem;
+        z-index: 5;
+        a {
+          display: block;
+          white-space: nowrap;
+          margin-bottom: 0.5rem;
+          text-align: center;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+        &.active {
+          display: block;
+        }
+      }
+    }
   }
 }
 
+.container {
+  padding: 8px;
+}
+
+.alert {
+  text-align: center;
+}
+
 .btn {
-  background-color: #d9d9d9;
+  background-color: $secondaryColor;
   font-family: $bodyText;
   border: none;
   padding: 0.75rem 2rem;
@@ -48,7 +90,7 @@ header {
   cursor: pointer;
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: #f8f9fa;
+    background-color: #d9d9d9;
   }
 }
 
@@ -101,7 +143,9 @@ header {
 
 .form-container {
   margin-top: 3rem;
+  padding: 1rem;
 }
+
 form {
   max-width: 25rem;
   padding: 1rem 1.5rem;
@@ -142,6 +186,7 @@ form {
 .posts-container {
   max-width: 984px;
   margin: 4rem auto 0;
+  padding: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;

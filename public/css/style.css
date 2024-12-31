@@ -338,16 +338,57 @@ header {
   margin-top: 12px;
 }
 header .img-container {
-  max-width: 12.5rem;
+  max-width: 8.5rem;
 }
 header nav {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+header nav .menu {
+  position: relative;
+}
+header nav .menu .menu-btn {
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: #f1f1f1;
+  cursor: pointer;
+  padding: 0;
+}
+header nav .menu .dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #b1b1b1;
+  border-radius: 4px;
+  padding: 1rem 0.5rem;
+  z-index: 5;
+}
+header nav .menu .dropdown a {
+  display: block;
+  white-space: nowrap;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+header nav .menu .dropdown a:last-child {
+  margin-bottom: 0;
+}
+header nav .menu .dropdown.active {
+  display: block;
+}
+
+.container {
+  padding: 8px;
+}
+
+.alert {
+  text-align: center;
+}
 
 .btn {
-  background-color: #d9d9d9;
+  background-color: #b1b1b1;
   font-family: "Inter", sans-serif;
   border: none;
   padding: 0.75rem 2rem;
@@ -356,7 +397,7 @@ header nav {
   transition: background-color 0.3s ease;
 }
 .btn:hover {
-  background-color: #f8f9fa;
+  background-color: #d9d9d9;
 }
 
 .hero {
@@ -400,6 +441,7 @@ header nav {
 
 .form-container {
   margin-top: 3rem;
+  padding: 1rem;
 }
 
 form {
@@ -438,6 +480,7 @@ form .btn {
 .posts-container {
   max-width: 984px;
   margin: 4rem auto 0;
+  padding: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
